@@ -1,0 +1,44 @@
+body, html {
+  margin: 0;
+  overflow: hidden; /* Evita el scroll tradicional */
+  transition: background-color 0.5s ease;
+  background-color: #050A15;
+}
+
+#webgl-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1; /* Al fondo */
+}
+
+#slide-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10; /* Sobre el canvas */
+  display: flex; /* Alinea las franjas horizontalmente */
+  cursor: pointer; /* Para indicar que es interactivo */
+}
+
+.slide-control {
+  flex-grow: 1; /* Cada franja toma una porción igual del ancho */
+  height: 100%;
+  /* background: rgba(255, 0, 0, 0.1); Descomenta esto para VER las franjas mientras desarrollas */
+}
+
+#indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-family: sans-serif;
+  font-size: 2rem;
+  z-index: 5;
+  pointer-events: none;
+}
