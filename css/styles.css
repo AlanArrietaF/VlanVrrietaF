@@ -1,44 +1,401 @@
-body, html {
-  margin: 0;
-  overflow: hidden; /* Evita el scroll tradicional */
-  transition: background-color 0.5s ease;
-  background-color: #050A15;
-}
+        body, html {
+            margin: 0;
+            background-color: #050A15;
+            font-family: sans-serif;
+            color: white;
+            overflow-x: hidden;
+        }
 
-#webgl-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 1; /* Al fondo */
-}
+        /* --- SECCION HERO --- */
+        .hero-section {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            transition: background-color 0.5s ease;
+            background-color: #050A15;
+        }
 
-#slide-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 10; /* Sobre el canvas */
-  display: flex; /* Alinea las franjas horizontalmente */
-  cursor: pointer; /* Para indicar que es interactivo */
-}
+        #webgl-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+        }
 
-.slide-control {
-  flex-grow: 1; /* Cada franja toma una porción igual del ancho */
-  height: 100%;
-  /* background: rgba(255, 0, 0, 0.1); Descomenta esto para VER las franjas mientras desarrollas */
-}
+        #slide-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 10;
+            display: flex;
+            cursor: pointer;
+        }
 
-#indicator {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-family: sans-serif;
-  font-size: 2rem;
-  z-index: 5;
-  pointer-events: none;
-}
+        .slide-control {
+            flex-grow: 1;
+            height: 100%;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        #indicador {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-family: sans-serif;
+            font-size: 2rem;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        /* --- BARRA DE NAVEGACION --- */
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 5%;
+            position: absolute;
+            width: 100%;
+            box-sizing: border-box;
+            z-index: 1000;
+        }
+
+        .menu-items {
+            display: flex;
+            gap: 10px;
+        }
+
+        .menu-items a {
+            margin-left: 10px;
+            text-decoration: none;
+            color: white !important;
+            font-size: 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            background-color: #050A15;
+            padding: 10px 25px;
+            border-radius: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .menu-items a:hover {
+            background-color: #4D5CD6;
+        }
+
+        /* --- NUEVA SECCION: SOBRE MI (ESTILO HELLO WORLD) --- */
+        .about-section {
+            color: #050A15;
+            position: relative;
+        }
+
+        .about-header {
+            background-color: #4D5CD6; /* Tu azul rey simulando el fondo morado */
+            color: white;
+            text-align: center;
+            padding: 100px 20px 180px 20px; /* Padding inferior grande para que las tarjetas se monten */
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-header h2 {
+            font-size: 3.5rem;
+            letter-spacing: 2px;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+        }
+
+        /* Contenedor que permite el scroll largo */
+        .about-scroll-area {
+            position: relative;
+            padding-bottom: 150px;
+            margin-top: -100px; /* Sube el contenedor para montarlo sobre el header */
+        }
+
+        /* Contenedor Sticky para las tarjetas */
+        .polaroid-container {
+            position: sticky;
+            top: 15vh; /* Se quedan fijas a esta distancia del tope de la pantalla */
+            height: 0; /* No ocupa espacio real para no empujar el texto */
+            z-index: 10;
+        }
+
+        /* --- ESTILO DE LAS TARJETAS (POLAROIDS) --- */
+        .polaroid {
+            position: absolute;
+            left: 50%;
+            width: 220px;
+            padding: 12px 12px 40px 12px; /* Margen inferior más ancho (estilo foto antigua) */
+            box-shadow: 8px 8px 15px rgba(0,0,0,0.3);
+            cursor: pointer;
+
+            /* La magia de la animación: combinamos la base inicial y el progreso del scroll */
+            /* Variables CSS controladas desde JavaScript */
+            --spread-x: 0vw;
+            --spread-y: 0px;
+            transform: translate(calc(-50% + var(--base-x) + var(--spread-x)), calc(var(--spread-y))) rotate(var(--base-rot));
+            transition: transform 0.3s ease-out, z-index 0s;
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border: 2px solid #eee;
+            display: block;
+        }
+
+        /* Efecto Hover: Traer al frente y enderezar */
+        .polaroid:hover {
+            z-index: 50 !important;
+            transform: translate(calc(-50% + var(--base-x) + var(--spread-x)), calc(var(--spread-y))) scale(1.15) rotate(0deg) !important;
+        }
+
+        /* --- CAJAS DE TEXTO (MISIÓN/VISIÓN) --- */
+        .about-content-grid {
+            max-width: 600px;
+            margin: 0 auto;
+            padding-top: 250px; /* Empuja el texto hacia abajo para dar espacio a la apertura de tarjetas */
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            position: relative;
+            z-index: 5;
+        }
+        .about-card h3 {
+            color: #4D5CD6;
+            font-size: 2rem;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .about-card p {
+            color: white;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            font-weight: 500;
+        }
+
+        /* Responsive basico: Desactivar spread en celulares */
+        @media (max-width: 900px) {
+            .polaroid { display: none; /* En móvil requeriría un diseño apilado distinto */ }
+            .about-content-grid { padding-top: 100px; }
+        }
+        /* --- NUEVA SECCIÓN: PORTFOLIO --- */
+        .portfolio-section {
+            background-color: #050A15;
+            padding-bottom: 120px;
+        }
+
+        /* Cabecera dinámica (blanco a azul) */
+        .portfolio-header {
+            background-color: white;
+            text-align: center;
+            padding: 30px 0;
+            transition: background-color 0.4s ease;
+            cursor: pointer;
+        }
+
+        .portfolio-header h2 {
+            color: #050A15;
+            font-size: 4rem;
+            margin: 0;
+            transition: color 0.4s ease;
+            letter-spacing: -2px;
+        }
+
+        .portfolio-header:hover {
+            background-color: #4D5CD6; /* Tu azul rey */
+        }
+
+        .portfolio-header:hover h2 {
+            color: white;
+        }
+
+        /* Contenedor de los proyectos */
+        .portfolio-grid {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            padding: 80px 20px 20px 20px;
+            flex-wrap: wrap; /* Para que se adapte si agregas más de uno */
+        }
+
+        /* --- EFECTO 3D FLIP CARD --- */
+        .flip-card {
+            background-color: transparent;
+            width: 380px;
+            height: 380px;
+            perspective: 1000px; /* Crea el espacio 3D */
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1); /* Curva suave */
+            transform-style: preserve-3d; /* Permite que los hijos existan en 3D */
+        }
+
+        /* Al agregar esta clase con JS, la tarjeta gira */
+        .flip-card.is-flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden; /* Oculta la espalda en Safari */
+            backface-visibility: hidden;         /* Oculta la espalda en Chrome/Firefox */
+        }
+
+        /* Cara Frontal (La imagen) */
+        .flip-card-front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Cara Trasera (La descripción) */
+        .flip-card-back {
+            background-color: #3A455C;
+            color: white;
+            transform: rotateY(180deg); /* Ya está volteada hacia atrás por defecto */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            box-sizing: border-box;
+            border: 2px solid #72B5ED;
+            text-align: center;
+        }
+
+        .flip-card-back h3 {
+            color: #72B5ED;
+            font-size: 2rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .flip-card-back p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Metadatos inferiores de tu diseño de Figma */
+        .portfolio-meta {
+            text-align: center;
+            margin-top: 20px;
+            color: white;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .portfolio-meta span {
+            color: #72B5ED;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        /* --- FOOTER --- */
+        .site-footer {
+            background-color: #050A15;
+            color: white;
+            padding: 100px 5% 40px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer-left h1 {
+            font-size: 10vw; /* Usa el ancho de la pantalla para el tamaño, perfecto para textos gigantes */
+            line-height: 0.85;
+            margin: 0;
+            letter-spacing: -4px;
+            font-weight: 800;
+        }
+
+        .footer-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 60px;
+        }
+
+        .footer-links-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .links-badge {
+            border: 1px solid white;
+            border-radius: 20px;
+            padding: 2px 12px;
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: underline;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #72B5ED;
+        }
+
+        .footer-copyright {
+            text-align: right;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        /* Ajuste responsivo para el footer */
+        @media (max-width: 900px) {
+            .site-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 50px;
+            }
+            .footer-left h1 {
+                font-size: 4rem;
+                letter-spacing: -2px;
+            }
+            .footer-right {
+                align-items: flex-start;
+                gap: 40px;
+            }
+            .footer-links-container, .footer-links, .footer-copyright {
+                align-items: flex-start;
+                text-align: left;
+            }
+        }

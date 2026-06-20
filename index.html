@@ -2,42 +2,164 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOME</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
+<body>
+
 <nav>
-    <a href="index.html" class="logo">HOME</a>
     <div class="menu-items">
-        <a href="index.html">HOME</a>
-        <a href="conductores.html">ARCHIVE</a>
-        <a href="historial.html">BLOG</a>
+        <a href="index.html">Home</a>
+        <a href="archive.html">Archive</a>
+        <a href="blog.html">Blog</a>
     </div>
 </nav>
 
-<body>
+<!-- HERO-->
+<section class="hero-section" id="hero">
     <canvas id="webgl-canvas"></canvas>
-        <div id="indicator">Cargando img</div>
-        <div id="slide-container">
-            <div class="slide-control" data-index="0"></div>
-            <div class="slide-control" data-index="1"></div>
-            <div class="slide-control" data-index="2"></div>
-            <div class="slide-control" data-index="3"></div>
-            <div class="slide-control" data-index="4"></div>
-            <div class="slide-control" data-index="5"></div>
-            <div class="slide-control" data-index="6"></div>
-            <div class="slide-control" data-index="7"></div>
-            <div class="slide-control" data-index="8"></div>
-            <div class="slide-control" data-index="9"></div>
-            <div class="slide-control" data-index="10"></div>
-            <div class="slide-control" data-index="11"></div>
-            <div class="slide-control" data-index="12"></div>
-            <div class="slide-control" data-index="13"></div>
-            <div class="slide-control" data-index="14"></div>
-            <div class="slide-control" data-index="15"></div>
-            <div class="slide-control" data-index="16"></div>
-            <div class="slide-control" data-index="17"></div>
+    <div id="indicador">Cargando imagen 0...</div>
+    <div id="slide-container">
+        <div class="slide-control" data-index="0"></div>
+        <div class="slide-control" data-index="1"></div>
+        <div class="slide-control" data-index="2"></div>
+        <div class="slide-control" data-index="3"></div>
+        <div class="slide-control" data-index="4"></div>
+        <div class="slide-control" data-index="5"></div>
+        <div class="slide-control" data-index="6"></div>
+        <div class="slide-control" data-index="7"></div>
+        <div class="slide-control" data-index="8"></div>
+        <div class="slide-control" data-index="9"></div>
+        <div class="slide-control" data-index="10"></div>
+        <div class="slide-control" data-index="11"></div>
+        <div class="slide-control" data-index="12"></div>
+        <div class="slide-control" data-index="13"></div>
+        <div class="slide-control" data-index="14"></div>
+        <div class="slide-control" data-index="15"></div>
+        <div class="slide-control" data-index="16"></div>
+        <div class="slide-control" data-index="17"></div>
+    </div>
+</section>
+
+<!-- ABOUT SECTION-->
+<section class="about-section" id="about">
+    <div class="about-scroll-area">
+
+        <!-- CERTIFICADOS -->
+        <div class="polaroid-container">
+            <!--
+              Atributos Data:
+              - side: a qué lado se moverá (left/right)
+              - position: si se queda arriba o baja (top/bottom)
+              - --base-x: Posición inicial agrupada
+              - --base-rot: Rotación inicial
+            -->
+            <div class="polaroid" data-side="left" data-position="top"
+                 style="--base-x: -180px; --base-rot: -12deg; --tape-color: #ffeb3b; z-index: 1;">
+                <img src="https://placehold.co/400x300/3A455C/FFFFFF?text=Cert+1" alt="Certificado 1">
+            </div>
+
+            <div class="polaroid" data-side="left" data-position="bottom"
+                 style="--base-x: -60px; --base-rot: -4deg; --tape-color: #9c27b0; z-index: 2;">
+                <img src="https://placehold.co/400x300/4D5CD6/FFFFFF?text=Cert+2" alt="Certificado 2">
+            </div>
+
+            <div class="polaroid" data-side="right" data-position="top"
+                 style="--base-x: 60px; --base-rot: 5deg; --tape-color: #8bc34a; z-index: 3;">
+                <img src="https://placehold.co/400x300/72B5ED/FFFFFF?text=Cert+3" alt="Certificado 3">
+            </div>
+
+            <div class="polaroid" data-side="right" data-position="bottom"
+                 style="--base-x: 180px; --base-rot: 15deg; --tape-color: #ff9800; z-index: 4;">
+                <img src="https://placehold.co/400x300/3A455C/FFFFFF?text=Cert+4" alt="Certificado 4">
+            </div>
         </div>
+
+        <!-- CONTENT -->
+        <div class="about-content-grid" id="text-grid">
+            <div class="about-card">
+                <h3>About me</h3>
+                <p>ICO student (Name Server Lookup) is a command-line network tool used to query the Domain Name System (DNS).
+                    It allows you to check which IP address corresponds to a domain name and troubleshoot DNS connectivity or configuration issues.
+                    ICO student (Name Server Lookup) is a command-line network tool used to query the Domain Name System (DNS).
+                    It allows you to check which IP address corresponds to a domain name and troubleshoot DNS connectivity or configuration issues.
+                    ICO student (Name Server Lookup) is a command-line network tool used to query the Domain Name System (DNS).
+                    It allows you to check which IP address corresponds to a domain name and troubleshoot DNS connectivity or configuration issues.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="portfolio-section" id="portfolio">
+    <div class="portfolio-header">
+        <h2>Portfolio</h2>
+    </div>
+
+    <div class="portfolio-grid">
+        <!-- Proyecto 1 -->
+        <div>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://placehold.co/400x400/0f3460/FFFFFF?text=False+Memory" alt="False Memory Cover">
+                    </div>
+                    <div class="flip-card-back">
+                        <h3>False Memory</h3>
+                        <p>Exploración visual mediante manipulación del DOM y texturas en Canvas, creando experiencias interactivas que responden a las emociones del usuario.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-meta">
+                False Memory by Artifact<br>
+            </div>
+        </div>
+        <!-- Proyecto 2 -->
+        <div>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://placehold.co/400x400/0f3460/FFFFFF?text=False+Memory" alt="False Memory Cover">
+                    </div>
+                    <div class="flip-card-back">
+                        <h3>False Memory</h3>
+                        <p>Exploración visual mediante manipulación del DOM y texturas en Canvas, creando experiencias interactivas que responden a las emociones del usuario.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-meta">
+                False Memory by Artifact<br>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!--FOOTER -->
+<footer class="site-footer">
+    <div class="footer-left">
+        <h1>&gt;Alan<br>ArrietaF</h1>
+    </div>
+
+    <div class="footer-right">
+        <div class="footer-links-container">
+            <span class="links-badge">LINKS</span>
+            <ul class="footer-links">
+                <li><a href="#">Instagram</a></li>
+                <li><a href="#">LinkedIn</a></li>
+                <li><a href="#">YouTube</a></li>
+                <li><a href="#">Email</a></li>
+            </ul>
+        </div>
+
+        <p class="footer-copyright">
+            @2026<br>
+            From me
+        </p>
+    </div>
+</footer>
+
 </body>
 <script src="js/app.js"></script>
 </html>
