@@ -1,401 +1,564 @@
-        body, html {
-            margin: 0;
-            background-color: #050A15;
-            font-family: sans-serif;
-            color: white;
-            overflow-x: hidden;
-        }
+/* ==========================================================================
+   1. ESTILOS BASE Y VARIABLES
+   ========================================================================== */
+   body, html {
+    margin: 0;
+    background-color: #050A15;
+    font-family: sans-serif;
+    color: white;
+    overflow-x: hidden;
+}
 
-        /* --- SECCION HERO --- */
-        .hero-section {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            transition: background-color 0.5s ease;
-            background-color: #050A15;
-        }
+/* ==========================================================================
+   2. COMPONENTES COMPARTIDOS (Se usan en múltiples páginas)
+   ========================================================================== */
 
-        #webgl-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 1;
-        }
+/* --- NAVEGACIÓN PRINCIPAL --- */
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 5%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1000;
+}
 
-        #slide-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 10;
-            display: flex;
-            cursor: pointer;
-        }
+.menu-items {
+    display: flex;
+    gap: 10px;
+}
 
-        .slide-control {
-            flex-grow: 1;
-            height: 100%;
-            border-right: 1px solid rgba(255, 255, 255, 0.05);
-        }
+.menu-items a {
+    margin-left: 10px;
+    text-decoration: none;
+    color: white !important;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: #050A15;
+    padding: 10px 25px;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+}
 
-        #indicador {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-family: sans-serif;
-            font-size: 2rem;
-            z-index: 5;
-            pointer-events: none;
-        }
+.menu-items a:hover {
+    background-color: #4D5CD6;
+}
 
-        /* --- BARRA DE NAVEGACION --- */
-        nav {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 30px 5%;
-            position: absolute;
-            width: 100%;
-            box-sizing: border-box;
-            z-index: 1000;
-        }
+.menu-items a.active {
+    background-color: #4D5CD6; /* Color azul rey para estado activo */
+}
 
-        .menu-items {
-            display: flex;
-            gap: 10px;
-        }
+/* --- LOGO FLOTANTE (Usado en Archive, etc.) --- */
+.logo-badge {
+    position: absolute;
+    top: 30px;
+    left: 5%;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    color: #050A15;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 900;
+    font-size: 1.1rem;
+    z-index: 1001;
+    letter-spacing: 1px;
+}
 
-        .menu-items a {
-            margin-left: 10px;
-            text-decoration: none;
-            color: white !important;
-            font-size: 2rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            background-color: #050A15;
-            padding: 10px 25px;
-            border-radius: 20px;
-            transition: background-color 0.3s;
-        }
+/* --- FOOTER GLOBAL --- */
+.site-footer {
+    background-color: #050A15;
+    color: white;
+    padding: 100px 5% 40px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: relative;
+    z-index: 10;
+}
 
-        .menu-items a:hover {
-            background-color: #4D5CD6;
-        }
+.footer-left h1 {
+    font-size: 10vw; /* Usa el ancho de la pantalla para el tamaño */
+    line-height: 0.85;
+    margin: 0;
+    letter-spacing: -4px;
+    font-weight: 800;
+}
 
-        /* --- NUEVA SECCION: SOBRE MI (ESTILO HELLO WORLD) --- */
-        .about-section {
-            color: #050A15;
-            position: relative;
-        }
+.footer-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 60px;
+}
 
-        .about-header {
-            background-color: #4D5CD6; /* Tu azul rey simulando el fondo morado */
-            color: white;
-            text-align: center;
-            padding: 100px 20px 180px 20px; /* Padding inferior grande para que las tarjetas se monten */
-            position: relative;
-            z-index: 2;
-        }
+.footer-links-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
 
-        .about-header h2 {
-            font-size: 3.5rem;
-            letter-spacing: 2px;
-            margin: 0 0 10px 0;
-            text-transform: uppercase;
-        }
+.links-badge {
+    border: 1px solid white;
+    border-radius: 20px;
+    padding: 2px 12px;
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
 
-        /* Contenedor que permite el scroll largo */
-        .about-scroll-area {
-            position: relative;
-            padding-bottom: 150px;
-            margin-top: -100px; /* Sube el contenedor para montarlo sobre el header */
-        }
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
 
-        /* Contenedor Sticky para las tarjetas */
-        .polaroid-container {
-            position: sticky;
-            top: 15vh; /* Se quedan fijas a esta distancia del tope de la pantalla */
-            height: 0; /* No ocupa espacio real para no empujar el texto */
-            z-index: 10;
-        }
+.footer-links a {
+    color: white;
+    text-decoration: underline;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
 
-        /* --- ESTILO DE LAS TARJETAS (POLAROIDS) --- */
-        .polaroid {
-            position: absolute;
-            left: 50%;
-            width: 220px;
-            padding: 12px 12px 40px 12px; /* Margen inferior más ancho (estilo foto antigua) */
-            box-shadow: 8px 8px 15px rgba(0,0,0,0.3);
-            cursor: pointer;
+.footer-links a:hover {
+    color: #72B5ED;
+}
 
-            /* La magia de la animación: combinamos la base inicial y el progreso del scroll */
-            /* Variables CSS controladas desde JavaScript */
-            --spread-x: 0vw;
-            --spread-y: 0px;
-            transform: translate(calc(-50% + var(--base-x) + var(--spread-x)), calc(var(--spread-y))) rotate(var(--base-rot));
-            transition: transform 0.3s ease-out, z-index 0s;
-        }
+.footer-copyright {
+    text-align: right;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    opacity: 0.8;
+    margin: 0;
+}
 
-        .polaroid img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border: 2px solid #eee;
-            display: block;
-        }
+/* ==========================================================================
+   3. SECCIONES DE HOME (index.html)
+   ========================================================================== */
 
-        /* Efecto Hover: Traer al frente y enderezar */
-        .polaroid:hover {
-            z-index: 50 !important;
-            transform: translate(calc(-50% + var(--base-x) + var(--spread-x)), calc(var(--spread-y))) scale(1.15) rotate(0deg) !important;
-        }
+/* --- HOME: HERO INTERACTIVO --- */
+.hero-section {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    transition: background-color 0.5s ease;
+    background-color: #050A15;
+}
 
-        /* --- CAJAS DE TEXTO (MISIÓN/VISIÓN) --- */
-        .about-content-grid {
-            max-width: 600px;
-            margin: 0 auto;
-            padding-top: 250px; /* Empuja el texto hacia abajo para dar espacio a la apertura de tarjetas */
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-            position: relative;
-            z-index: 5;
-        }
-        .about-card h3 {
-            color: #4D5CD6;
-            font-size: 2rem;
-            margin-top: 0;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+#webgl-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
 
-        .about-card p {
-            color: white;
-            font-size: 1.1rem;
-            line-height: 1.7;
-            font-weight: 500;
-        }
+#slide-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    display: flex;
+    cursor: pointer;
+}
 
-        /* Responsive basico: Desactivar spread en celulares */
-        @media (max-width: 900px) {
-            .polaroid { display: none; /* En móvil requeriría un diseño apilado distinto */ }
-            .about-content-grid { padding-top: 100px; }
-        }
-        /* --- NUEVA SECCIÓN: PORTFOLIO --- */
-        .portfolio-section {
-            background-color: #050A15;
-            padding-bottom: 120px;
-        }
+.slide-control {
+    flex-grow: 1;
+    height: 100%;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
 
-        /* Cabecera dinámica (blanco a azul) */
-        .portfolio-header {
-            background-color: white;
-            text-align: center;
-            padding: 30px 0;
-            transition: background-color 0.4s ease;
-            cursor: pointer;
-        }
+#indicador {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-family: sans-serif;
+    font-size: 2rem;
+    z-index: 5;
+    pointer-events: none;
+}
 
-        .portfolio-header h2 {
-            color: #050A15;
-            font-size: 4rem;
-            margin: 0;
-            transition: color 0.4s ease;
-            letter-spacing: -2px;
-        }
+/* --- HOME: ABOUT (Tarjetas Polaroid y Textos) --- */
+.about-section {
+    color: #050A15;
+    position: relative;
+}
 
-        .portfolio-header:hover {
-            background-color: #4D5CD6; /* Tu azul rey */
-        }
+.about-header {
+    background-color: #4D5CD6;
+    color: white;
+    text-align: center;
+    padding: 100px 20px 180px 20px;
+    position: relative;
+    z-index: 2;
+}
 
-        .portfolio-header:hover h2 {
-            color: white;
-        }
+.about-header h2 {
+    font-size: 3.5rem;
+    letter-spacing: 2px;
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
+}
 
-        /* Contenedor de los proyectos */
-        .portfolio-grid {
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            padding: 80px 20px 20px 20px;
-            flex-wrap: wrap; /* Para que se adapte si agregas más de uno */
-        }
+.about-scroll-area {
+    position: relative;
+    padding-bottom: 150px;
+    margin-top: -100px;
+}
 
-        /* --- EFECTO 3D FLIP CARD --- */
-        .flip-card {
-            background-color: transparent;
-            width: 380px;
-            height: 380px;
-            perspective: 1000px; /* Crea el espacio 3D */
-            cursor: pointer;
-        }
+.polaroid-container {
+    position: sticky;
+    top: 15vh;
+    height: 0;
+    z-index: 10;
+}
 
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1); /* Curva suave */
-            transform-style: preserve-3d; /* Permite que los hijos existan en 3D */
-        }
+.polaroid {
+    position: absolute;
+    left: 50%;
+    width: 220px;
+    padding: 12px 12px 40px 12px;
+    box-shadow: 8px 8px 15px rgba(0,0,0,0.3);
+    cursor: pointer;
 
-        /* Al agregar esta clase con JS, la tarjeta gira */
-        .flip-card.is-flipped .flip-card-inner {
-            transform: rotateY(180deg);
-        }
+    --spread-x: 0vw;
+    --spread-y: 0px;
+    transform: translate(calc(-50% + var(--base-x) + var(--spread-x)), calc(var(--spread-y))) rotate(var(--base-rot));
+    transition: transform 0.3s ease-out, z-index 0s;
+}
 
-        .flip-card-front, .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden; /* Oculta la espalda en Safari */
-            backface-visibility: hidden;         /* Oculta la espalda en Chrome/Firefox */
-        }
+.polaroid img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border: 2px solid #eee;
+    display: block;
+}
 
-        /* Cara Frontal (La imagen) */
-        .flip-card-front img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+.polaroid:hover {
+    z-index: 50 !important;
+    transform: translate(calc(-50% + var(--base-x) + var(--spread-x)), calc(var(--spread-y))) scale(1.15) rotate(0deg) !important;
+}
 
-        /* Cara Trasera (La descripción) */
-        .flip-card-back {
-            background-color: #3A455C;
-            color: white;
-            transform: rotateY(180deg); /* Ya está volteada hacia atrás por defecto */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-            box-sizing: border-box;
-            border: 2px solid #72B5ED;
-            text-align: center;
-        }
+.about-content-grid {
+    max-width: 600px;
+    margin: 0 auto;
+    padding-top: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    position: relative;
+    z-index: 5;
+}
 
-        .flip-card-back h3 {
-            color: #72B5ED;
-            font-size: 2rem;
-            margin-top: 0;
-            margin-bottom: 15px;
-        }
+.about-card {
+    background: #1a1a2e; /* Fondo oscuro añadido de versiones previas */
+    border: 4px solid #3A455C;
+    padding: 40px;
+    box-shadow: 10px 10px 0px #4D5CD6;
+}
 
-        .flip-card-back p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
+.about-card h3 {
+    color: #4D5CD6;
+    font-size: 2rem;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 
-        /* Metadatos inferiores de tu diseño de Figma */
-        .portfolio-meta {
-            text-align: center;
-            margin-top: 20px;
-            color: white;
-            font-size: 0.9rem;
-            line-height: 1.8;
-        }
+.about-card p {
+    color: white;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    font-weight: 500;
+}
 
-        .portfolio-meta span {
-            color: #72B5ED;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 0.8rem;
-        }
-        /* --- FOOTER --- */
-        .site-footer {
-            background-color: #050A15;
-            color: white;
-            padding: 100px 5% 40px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            position: relative;
-            z-index: 10;
-        }
+/* --- HOME: PORTFOLIO (Tarjetas 3D Flip) --- */
+.portfolio-section {
+    background-color: #050A15;
+    padding-bottom: 120px;
+}
 
-        .footer-left h1 {
-            font-size: 10vw; /* Usa el ancho de la pantalla para el tamaño, perfecto para textos gigantes */
-            line-height: 0.85;
-            margin: 0;
-            letter-spacing: -4px;
-            font-weight: 800;
-        }
+.portfolio-header {
+    background-color: white;
+    text-align: center;
+    padding: 30px 0;
+    transition: background-color 0.4s ease;
+    cursor: pointer;
+}
 
-        .footer-right {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 60px;
-        }
+.portfolio-header h2 {
+    color: #050A15;
+    font-size: 4rem;
+    margin: 0;
+    transition: color 0.4s ease;
+    letter-spacing: -2px;
+}
 
-        .footer-links-container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 10px;
-        }
+.portfolio-header:hover {
+    background-color: #4D5CD6;
+}
 
-        .links-badge {
-            border: 1px solid white;
-            border-radius: 20px;
-            padding: 2px 12px;
-            font-size: 0.65rem;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-        }
+.portfolio-header:hover h2 {
+    color: white;
+}
 
-        .footer-links {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            text-align: right;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
+.portfolio-grid {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    padding: 80px 20px 20px 20px;
+    flex-wrap: wrap;
+}
 
-        .footer-links a {
-            color: white;
-            text-decoration: underline;
-            font-size: 1rem;
-            transition: color 0.3s;
-        }
+.flip-card {
+    background-color: transparent;
+    width: 380px;
+    height: 380px;
+    perspective: 1000px;
+    cursor: pointer;
+}
 
-        .footer-links a:hover {
-            color: #72B5ED;
-        }
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+}
 
-        .footer-copyright {
-            text-align: right;
-            font-size: 0.85rem;
-            line-height: 1.5;
-            opacity: 0.8;
-            margin: 0;
-        }
+.flip-card.is-flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
 
-        /* Ajuste responsivo para el footer */
-        @media (max-width: 900px) {
-            .site-footer {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 50px;
-            }
-            .footer-left h1 {
-                font-size: 4rem;
-                letter-spacing: -2px;
-            }
-            .footer-right {
-                align-items: flex-start;
-                gap: 40px;
-            }
-            .footer-links-container, .footer-links, .footer-copyright {
-                align-items: flex-start;
-                text-align: left;
-            }
-        }
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.flip-card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.flip-card-back {
+    background-color: #3A455C;
+    color: white;
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    box-sizing: border-box;
+    border: 2px solid #72B5ED;
+    text-align: center;
+}
+
+.flip-card-back h3 {
+    color: #72B5ED;
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.flip-card-back p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.portfolio-meta {
+    text-align: center;
+    margin-top: 20px;
+    color: white;
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+.portfolio-meta span {
+    color: #72B5ED;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+/* ==========================================================================
+   4. SECCIONES DE ARCHIVE (archive.html)
+   ========================================================================== */
+
+/* --- ARCHIVE: HERO (Título gigante y rollo flotante) --- */
+.archive-hero {
+    position: relative;
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 80px;
+    box-sizing: border-box;
+}
+
+.archive-title-container {
+    position: relative;
+    display: inline-block;
+}
+
+.archive-title {
+    font-size: 16vw;
+    font-weight: 800;
+    letter-spacing: -0.06em;
+    margin: 0;
+    line-height: 0.9;
+}
+
+.floating-film {
+    position: absolute;
+    right: -6vw;
+    bottom: -2vw;
+    width: 10vw;
+    min-width: 80px;
+    transform: rotate(25deg);
+    z-index: 5;
+    filter: drop-shadow(5px 15px 15px rgba(0,0,0,0.5));
+    pointer-events: none;
+}
+
+/* --- ARCHIVE: GRID (Imágenes editoriales gigantes) --- */
+.archive-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 0 5% 100px 5%;
+    box-sizing: border-box;
+}
+
+.archive-item {
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.archive-item img {
+    width: 100%;
+    height: 70vh;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.archive-item:hover img {
+    transform: scale(1.05);
+}
+
+/* ==========================================================================
+   5. MEDIA QUERIES (Diseño Responsivo / Móviles)
+   ========================================================================== */
+
+@media (max-width: 900px) {
+
+    /* --- NAVEGACIÓN Y LOGO EN MÓVILES --- */
+    nav {
+        position: absolute; /* Mantenemos absolute en móviles para superponer */
+        padding: 10px 5%;
+        top: 20px;
+    }
+
+    .menu-items {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .menu-items a {
+        margin-left: 0;
+        padding: 8px 18px;
+        font-size: 0.85rem;
+    }
+
+    .logo-badge {
+        position: relative; /* Dependiendo si quieres el logo fijo o fluido en archive */
+        top: 0;
+        left: 0;
+        margin: 20px auto 10px auto;
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+
+    /* --- HOME: Ajustes Móviles --- */
+    .polaroid {
+        display: none; /* Desactivar polaroids en pantallas muy pequeñas */
+    }
+
+    .about-content-grid {
+        padding-top: 100px;
+    }
+
+    .hero-section {
+        padding-top: 80px;
+    }
+
+    /* --- ARCHIVE: Ajustes Móviles --- */
+    .archive-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .archive-title {
+        font-size: 22vw;
+    }
+
+    .floating-film {
+        right: -8vw;
+        width: 18vw;
+    }
+
+    .archive-hero {
+        padding-top: 100px; /* Separación para que no choque con el nav en archive */
+        min-height: 50vh;
+    }
+
+    /* --- FOOTER: Ajustes Móviles --- */
+    .site-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 50px;
+    }
+
+    .footer-left h1 {
+        font-size: 4rem;
+        letter-spacing: -2px;
+    }
+
+    .footer-right {
+        align-items: flex-start;
+        gap: 40px;
+    }
+
+    .footer-links-container, .footer-links, .footer-copyright {
+        align-items: flex-start;
+        text-align: left;
+    }
+}
