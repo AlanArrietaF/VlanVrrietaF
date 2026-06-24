@@ -13,7 +13,7 @@
    2. COMPONENTES COMPARTIDOS (Se usan en múltiples páginas)
    ========================================================================== */
 
-/* --- NAVEGACIÓN PRINCIPAL --- */
+/* --- NAV --- */
 nav {
     display: flex;
     justify-content: center;
@@ -49,30 +49,7 @@ nav {
     background-color: #4D5CD6;
 }
 
-.menu-items a.active {
-    background-color: #4D5CD6; /* Color azul rey para estado activo */
-}
-
-/* --- LOGO FLOTANTE (Usado en Archive, etc.) --- */
-.logo-badge {
-    position: absolute;
-    top: 30px;
-    left: 5%;
-    width: 50px;
-    height: 50px;
-    background-color: white;
-    color: #050A15;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 900;
-    font-size: 1.1rem;
-    z-index: 1001;
-    letter-spacing: 1px;
-}
-
-/* --- FOOTER GLOBAL --- */
+/* --- FOOTER --- */
 .site-footer {
     background-color: #050A15;
     color: white;
@@ -85,7 +62,7 @@ nav {
 }
 
 .footer-left h1 {
-    font-size: 10vw; /* Usa el ancho de la pantalla para el tamaño */
+    font-size: 10vw;
     line-height: 0.85;
     margin: 0;
     letter-spacing: -4px;
@@ -148,7 +125,7 @@ nav {
    3. SECCIONES DE HOME (index.html)
    ========================================================================== */
 
-/* --- HOME: HERO INTERACTIVO --- */
+/* --- HOME: HERO --- */
 .hero-section {
     position: relative;
     width: 100vw;
@@ -196,7 +173,7 @@ nav {
     pointer-events: none;
 }
 
-/* --- HOME: ABOUT (Tarjetas Polaroid y Textos) --- */
+/* --- HOME: ABOUT --- */
 .about-section {
     color: #050A15;
     position: relative;
@@ -292,7 +269,69 @@ nav {
     font-weight: 500;
 }
 
-/* --- HOME: PORTFOLIO (Tarjetas 3D Flip) --- */
+/* --- BLOG: <p> --- */
+.parraf-section {
+    color: #050A15;
+    position: relative;
+}
+
+.parraf-header {
+    background-color: #4D5CD6;
+    color: white;
+    text-align: center;
+    padding: 100px 20px 180px 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.parraf-header h2 {
+    font-size: 3.5rem;
+    letter-spacing: 2px;
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
+}
+
+.parraf-scroll-area {
+    position: relative;
+    padding-bottom: 150px;
+    margin-top: -100px;
+}
+
+.parraf-content-grid {
+    max-width: 600px;
+    margin: 0 auto;
+    padding-top: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    position: relative;
+    z-index: 5;
+}
+
+.parraf-card {
+    background: #1a1a2e;
+    border: 4px solid #3A455C;
+    padding: 40px;
+    box-shadow: 10px 10px 0px #4D5CD6;
+}
+
+.parraf-card h3 {
+    color: #4D5CD6;
+    font-size: 2rem;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.parraf-card p {
+    color: white;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    font-weight: 500;
+}
+
+/* --- HOME: PORTFOLIO --- */
 .portfolio-section {
     background-color: #050A15;
     padding-bottom: 120px;
@@ -409,7 +448,7 @@ nav {
    4. SECCIONES DE ARCHIVE (archive.html)
    ========================================================================== */
 
-/* --- ARCHIVE: HERO (Título gigante y rollo flotante) --- */
+/* --- ARCHIVE: HERO --- */
 .archive-hero {
     position: relative;
     width: 100%;
@@ -446,7 +485,7 @@ nav {
     pointer-events: none;
 }
 
-/* --- ARCHIVE: GRID (Imágenes editoriales gigantes) --- */
+/* --- ARCHIVE: GRID --- */
 .archive-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
