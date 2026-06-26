@@ -35,9 +35,9 @@ window.addEventListener('scroll', () => {
 
         // Definimos cuándo empieza y termina la animación
         // Empieza cuando el texto entra en el 90% inferior de la pantalla
-        const triggerPoint = window.innerHeight * 0.6;
+        const triggerPoint = window.innerHeight * 0.5;
         // Termina (máxima dispersión) cuando el texto llega al 40% de la pantalla
-        const endPoint = window.innerHeight * 0.4;
+        const endPoint = window.innerHeight * 0.2;
 
         let progress = 0;
             if (rect.top < triggerPoint) {
