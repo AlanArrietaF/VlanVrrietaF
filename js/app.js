@@ -2,27 +2,44 @@
 const slideControls = document.querySelectorAll('.slide-control');
 const indicador = document.getElementById('indicador');
 let currentImageIndex = -1;
-const coloresSimulados = [
-        '#050A15', '#3A455C', '#4D5CD6', '#72B5ED', '#F1F9FE',
-        '#1a1a2e', '#16213e', '#0f3460', '#e94560', '#533483',
-        '#2e0249', '#570a57', '#a91079', '#e81899', '#ffaa00',
-        '#00adb5', '#393e46', '#222831'
+
+// 1. Cambiamos los colores por un array con las rutas de tus imágenes.
+// NOTA: Cuando tengas tus propias fotos, cambia los links por algo como 'assets/img/foto1.jpg'
+const imagenesHero = [
+    'assets/FAMA.jpeg',
+    'assets/BANDERA.jpg',
+    'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1920&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1920&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1920&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1920&auto=format&fit=crop',
+    'assets/VOLCANO.jpg',
+    'assets/RUBIK.jpg',
+    'assets/AULA.jpg',
+    'assets/MONUMENTO.jpg',
+    'assets/SALON.jpg'
 ];
 
+// 2. Pre-cargamos las imágenes "en secreto" para evitar parpadeos la primera vez
+imagenesHero.forEach(src => {
+    const img = new Image();
+    img.src = src;
+});
+
 slideControls.forEach(control => {
-       control.addEventListener('mouseenter', (event) => {
-            const newIndex = parseInt(event.target.getAttribute('data-index'));
-                if (newIndex !== currentImageIndex) {
-                    currentImageIndex = newIndex;
-                    triggerThreeJsTransition(currentImageIndex);
-            }
-       });
+    control.addEventListener('mouseenter', (event) => {
+        const newIndex = parseInt(event.target.getAttribute('data-index'));
+        if (newIndex !== currentImageIndex) {
+            currentImageIndex = newIndex;
+            triggerThreeJsTransition(currentImageIndex);
+        }
+    });
 });
 
 function triggerThreeJsTransition(index) {
-         indicador.innerText = `Mostrando Imagen ${index}`;
-         document.getElementById('hero').style.backgroundColor = coloresSimulados[index];
-         indicador.style.color = index === 4 ? 'black' : 'white';
+    // 3. Aplicamos la imagen directamente al fondo del contenedor Hero
+    const hero = document.getElementById('hero');
+    hero.style.backgroundImage = `url('${imagenesHero[index]}')`;
 }
 
 // --- LÓGICA: ANIMACIÓN DE DISPERSIÓN AL HACER SCROLL ---

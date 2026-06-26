@@ -133,6 +133,10 @@ nav {
     overflow: hidden;
     transition: background-color 0.5s ease;
     background-color: #050A15;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 0.4s ease-in-out, background-color 0.5s ease;
 }
 
 #webgl-canvas {
