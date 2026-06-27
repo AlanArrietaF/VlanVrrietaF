@@ -32,6 +32,13 @@ imagenesHero.forEach(src => {
     img.src = src;
 });
 
+function triggerThreeJsTransition(index) {
+    // 3. Aplicamos la imagen directamente al fondo del contenedor Hero
+    const hero = document.getElementById('hero');
+    hero.style.backgroundImage = `url('${imagenesHero[index]}')`;
+}
+
+// --- DESKTOP (Mouse) ---
 slideControls.forEach(control => {
     control.addEventListener('mouseenter', (event) => {
         const newIndex = parseInt(event.target.getAttribute('data-index'));
@@ -42,11 +49,38 @@ slideControls.forEach(control => {
     });
 });
 
-function triggerThreeJsTransition(index) {
-    // 3. Aplicamos la imagen directamente al fondo del contenedor Hero
-    const hero = document.getElementById('hero');
-    hero.style.backgroundImage = `url('${imagenesHero[index]}')`;
+// --- MOBILES (Touch) ---
+function handleTouch(event) {
+    // Obtenemos la coordenada horizontal (X) del primer dedo tocando la pantalla
+    const touch = event.touches[0];
+    const clientX = touch.clientX;
+    const screenWidth = window.innerWidth;
+
+    // Regla de 3: Si clientX es a screenWidth, qué índice le toca de totalSlides
+    let MathIndex = Math.floor((clientX / screenWidth) * totalSlides);
+
+    // Limitamos el valor por seguridad para que nunca busque imágenes que no existen
+    let newIndex = Math.max(0, Math.min(MathIndex, totalSlides - 1));
+
+    // Si cambió de sección, disparamos la imagen
+    if (newIndex !== currentImageIndex) {
+        currentImageIndex = newIndex;
+        triggerThreeJsTransition(currentImageIndex);
+    }
 }
+
+// Escuchamos cuando el usuario pone el dedo o lo desliza
+if (slideContainer) {
+    slideContainer.addEventListener('touchstart', handleTouch, { passive: true });
+    slideContainer.addEventListener('touchmove', handleTouch, { passive: true });
+}
+
+// --- 5. MEJORA DE UX: Evitar pantalla negra ---
+// Al cargar la página, forzamos a mostrar la primera imagen automáticamente
+window.addEventListener('load', () => {
+    currentImageIndex = 0;
+    triggerThreeJsTransition(0);
+});
 
 // --- LÓGICA: ANIMACIÓN DE DISPERSIÓN AL HACER SCROLL ---
 const textGrid = document.getElementById('text-grid');
