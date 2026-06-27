@@ -1,6 +1,8 @@
 // --- LOGICA DE FRANJAS DEL HERO ---
 const slideControls = document.querySelectorAll('.slide-control');
 const indicador = document.getElementById('indicador');
+const hero = document.getElementById('hero');
+const desktopText = document.getElementById('desktop-text');
 let currentImageIndex = -1;
 
 const imagenesHero = [
@@ -33,53 +35,71 @@ imagenesHero.forEach(src => {
 });
 
 function triggerThreeJsTransition(index) {
+    if (window.innerWidth <= 900) {
     // 3. Aplicamos la imagen directamente al fondo del contenedor Hero
     const hero = document.getElementById('hero');
     hero.style.backgroundImage = `url('${imagenesHero[index]}')`;
+    }
 }
 
-// --- DESKTOP (Mouse) ---
-slideControls.forEach(control => {
-    control.addEventListener('mouseenter', (event) => {
-        const newIndex = parseInt(event.target.getAttribute('data-index'));
+
+
+const targetName = ">AlanArrietaF";
+
+// Escuchamos el movimiento del ratón en toda la sección
+hero.addEventListener('mousemove', (event) => {
+    if (window.innerWidth > 900) {
+        const screenWidth = window.innerWidth;
+        const clientX = event.clientX;
+
+        // Calculamos el porcentaje de derecha a izquierda
+        // Si clientX es el ancho total (derecha), porcentaje es 0.
+        // Si clientX es 0 (izquierda), porcentaje es 1 (100%).
+        let percentage = 1 - (clientX / screenWidth);
+
+        // Mapeamos ese porcentaje a la cantidad de letras que vamos a mostrar
+        let charCount = Math.floor(percentage * targetName.length);
+        charCount = Math.max(0, Math.min(charCount, targetName.length));
+
+        if (charCount === 0) {
+            desktopText.innerText = "Desliza a la izquierda \u2190";
+        } else {
+            // Se va revelando el nombre y le agregamos un cursor al final
+            desktopText.innerText = targetName.substring(0, charCount) + "_";
+        }
+    }
+});
+
+// --- 2. LÓGICA PARA MÓVILES: EVENTOS TOUCH ---
+function handleTouch(event) {
+    if (window.innerWidth <= 900) {
+        const touch = event.touches[0];
+        const clientX = touch.clientX;
+        const screenWidth = window.innerWidth;
+
+        let MathIndex = Math.floor((clientX / screenWidth) * imagenesHero.length);
+        let newIndex = Math.max(0, Math.min(MathIndex, imagenesHero.length - 1));
+
         if (newIndex !== currentImageIndex) {
             currentImageIndex = newIndex;
             triggerThreeJsTransition(currentImageIndex);
         }
-    });
-});
-
-// --- MOBILES (Touch) ---
-function handleTouch(event) {
-    // Obtenemos la coordenada horizontal (X) del primer dedo tocando la pantalla
-    const touch = event.touches[0];
-    const clientX = touch.clientX;
-    const screenWidth = window.innerWidth;
-
-    // Regla de 3: Si clientX es a screenWidth, qué índice le toca de totalSlides
-    let MathIndex = Math.floor((clientX / screenWidth) * totalSlides);
-
-    // Limitamos el valor por seguridad para que nunca busque imágenes que no existen
-    let newIndex = Math.max(0, Math.min(MathIndex, totalSlides - 1));
-
-    // Si cambió de sección, disparamos la imagen
-    if (newIndex !== currentImageIndex) {
-        currentImageIndex = newIndex;
-        triggerThreeJsTransition(currentImageIndex);
     }
 }
 
-// Escuchamos cuando el usuario pone el dedo o lo desliza
+const slideContainer = document.getElementById('slide-container');
 if (slideContainer) {
+    // Eventos táctiles para el celular
     slideContainer.addEventListener('touchstart', handleTouch, { passive: true });
     slideContainer.addEventListener('touchmove', handleTouch, { passive: true });
 }
 
-// --- 5. MEJORA DE UX: Evitar pantalla negra ---
-// Al cargar la página, forzamos a mostrar la primera imagen automáticamente
 window.addEventListener('load', () => {
-    currentImageIndex = 0;
-    triggerThreeJsTransition(0);
+    // Al iniciar, si es celular mostramos la primera foto
+    if (window.innerWidth <= 900) {
+        currentImageIndex = 0;
+        triggerThreeJsTransition(0);
+    }
 });
 
 // --- LÓGICA: ANIMACIÓN DE DISPERSIÓN AL HACER SCROLL ---
