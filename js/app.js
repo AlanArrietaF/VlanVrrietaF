@@ -3,24 +3,30 @@ const slideControls = document.querySelectorAll('.slide-control');
 const indicador = document.getElementById('indicador');
 let currentImageIndex = -1;
 
-// 1. Cambiamos los colores por un array con las rutas de tus imágenes.
-// NOTA: Cuando tengas tus propias fotos, cambia los links por algo como 'assets/img/foto1.jpg'
 const imagenesHero = [
-    'assets/FAMA.jpeg',
-    'assets/BANDERA.jpg',
-    'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1920&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1920&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1920&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1920&auto=format&fit=crop',
     'assets/VOLCANO.jpg',
-    'assets/RUBIK.jpg',
+    'assets/BANDERA.jpg',
+    'assets/CDMX.jpeg',
+    'assets/MX.jpeg',
+    'assets/GODZILLA.jpg',
+    'assets/CANCHA.jpg',
+    'assets/CERRO.jpg',
+    'assets/VOLCAN.jpg',
     'assets/AULA.jpg',
+    /*10*/
+    'assets/CU.jpg',
+    /* */
     'assets/MONUMENTO.jpg',
-    'assets/SALON.jpg'
+    'assets/SALON.jpg',
+    'assets/DRUMS.jpg',
+    'assets/PECES.jpg',
+    'assets/PISTA.jpg',
+    'assets/RUN.jpg',
+    'assets/ECU.jpg',
+    'assets/GALERIA.jpg'
 ];
 
-// 2. Pre-cargamos las imágenes "en secreto" para evitar parpadeos la primera vez
+// Preload images
 imagenesHero.forEach(src => {
     const img = new Image();
     img.src = src;

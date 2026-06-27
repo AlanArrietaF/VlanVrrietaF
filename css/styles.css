@@ -162,7 +162,6 @@ nav {
 .slide-control {
     flex-grow: 1;
     height: 100%;
-    border-right: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 #indicador {
@@ -202,27 +201,30 @@ nav {
 .about-scroll-area {
     position: relative;
     padding-bottom: 150px;
-    margin-top: -100px;
+    padding-top: 20px;
 }
 
 .polaroid-container {
     position: sticky;
-    top: 15vh;
-    height: 0;
+    top: 30vh;
+    height: 250px;
     z-index: 10;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
 }
 
 .polaroid {
     position: absolute;
-    left: 50%;
     width: 220px;
     padding: 12px 12px 40px 12px;
     box-shadow: 8px 8px 15px rgba(0,0,0,0.3);
     cursor: pointer;
+    pointer-events: auto;
 
     --spread-x: 0vw;
     --spread-y: 0px;
-    transform: translate(calc(-50% + var(--base-x) + var(--spread-x)), calc(var(--spread-y))) rotate(var(--base-rot));
+    transform: translate(calc(var(--base-x) + var(--spread-x)), calc(var(--spread-y))) rotate(var(--base-rot));
     transition: transform 0.3s ease-out, z-index 0s;
 }
 
@@ -243,7 +245,7 @@ nav {
 .about-content-grid {
     max-width: 600px;
     margin: 0 auto;
-    padding-top: 250px;
+    padding-top: 50px;
     display: flex;
     flex-direction: column;
     gap: 40px;
