@@ -42,30 +42,36 @@ function triggerThreeJsTransition(index) {
     }
 }
 
-
-
 const targetName = ">AlanArrietaF";
+let isNameFullyTyped = false;
 
 // Escuchamos el movimiento del ratón en toda la sección
 hero.addEventListener('mousemove', (event) => {
     if (window.innerWidth > 900) {
+        // Si ya se escribió por completo, ignoramos el movimiento del ratón
+        if (isNameFullyTyped) return;
+
         const screenWidth = window.innerWidth;
         const clientX = event.clientX;
 
-        // Calculamos el porcentaje de derecha a izquierda
-        // Si clientX es el ancho total (derecha), porcentaje es 0.
-        // Si clientX es 0 (izquierda), porcentaje es 1 (100%).
         let percentage = 1 - (clientX / screenWidth);
 
-        // Mapeamos ese porcentaje a la cantidad de letras que vamos a mostrar
-        let charCount = Math.floor(percentage * targetName.length);
+        // Multiplicamos por (length + 1) para que no tengas que llegar al borde exacto de la pantalla
+        let charCount = Math.floor(percentage * (targetName.length + 1));
         charCount = Math.max(0, Math.min(charCount, targetName.length));
 
         if (charCount === 0) {
             desktopText.innerText = "Desliza a la izquierda \u2190";
+            desktopText.style.fontSize = "3vw";
+        } else if (charCount === targetName.length) {
+            // Cuando llega al último caracter, escribimos el texto final y bloqueamos
+            desktopText.innerText = targetName;
+            desktopText.style.fontSize = "10vw";
+            isNameFullyTyped = true;
         } else {
-            // Se va revelando el nombre y le agregamos un cursor al final
+            // Mientras no llegue al final, seguimos mostrando el guion
             desktopText.innerText = targetName.substring(0, charCount) + "_";
+            desktopText.style.fontSize = "10vw";
         }
     }
 });

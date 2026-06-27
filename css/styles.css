@@ -527,6 +527,23 @@ nav {
     font-size: 0.8rem;
 }
 
+.portfolio-meta li {
+    list-style: none; /* Esto elimina el punto blanco de la lista */
+    margin: 0;
+    padding: 0;
+}
+
+.portfolio-meta a {
+    color: white; /* El texto empieza en blanco */
+    text-decoration: none; /* Quitamos el subrayado feo de los enlaces por defecto */
+    font-weight: bold;
+    transition: color 0.3s ease; /* Hacemos que el cambio de color sea suave */
+}
+
+.portfolio-meta a:hover {
+    color: #72B5ED; /* Cambia a tu azul claro al pasar el ratón */
+}
+
 /* ==========================================================================
    4. SECCIONES DE ARCHIVE (archive.html)
    ========================================================================== */
