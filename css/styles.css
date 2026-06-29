@@ -276,7 +276,7 @@ nav {
 }
 
 .about-content-grid {
-    max-width: 850px;
+    max-width: 1000px;
     margin: 0 auto;
     padding-top: 50px;
     display: flex;
@@ -304,7 +304,7 @@ nav {
 
 .about-card p {
     color: white;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     line-height: 1.7;
     font-weight: 500;
 }
@@ -338,7 +338,7 @@ nav {
 }
 
 .parraf-content-grid {
-    max-width: 850px;
+    max-width: 1000px;
     margin: 0 auto;
     padding-top: 50px;
     display: flex;
@@ -366,7 +366,7 @@ nav {
 
 .parraf-card p {
     color: white;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     line-height: 1.7;
     font-weight: 500;
 }
