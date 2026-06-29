@@ -409,7 +409,7 @@ nav {
 /* Para el reproductor Iframe interactivo (Apple Music) */
 .music-iframe-wrapper {
     width: 100%;
-    max-width: 660px;
+    max-width: 1000px;
     display: flex;
     justify-content: center; /* Centra el iframe internamente */
 }
