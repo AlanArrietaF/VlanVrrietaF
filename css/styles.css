@@ -394,7 +394,7 @@ nav {
 }
 
 .music-image {
-    width: 250px;
+    width: 400px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.5);
     border: 2px solid #72B5ED;
@@ -409,7 +409,7 @@ nav {
 /* Para el reproductor Iframe interactivo (Apple Music) */
 .music-iframe-wrapper {
     width: 100%;
-    max-width: 1000px;
+    max-width: 650px;
     display: flex;
     justify-content: center; /* Centra el iframe internamente */
 }
