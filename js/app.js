@@ -6,26 +6,19 @@ const desktopText = document.getElementById('desktop-text');
 let currentImageIndex = -1;
 
 const imagenesHero = [
-    'assets/VOLCANO.jpg',
+    'assets/PISTA.jpg',
     'assets/BANDERA.jpg',
     'assets/CDMX.jpeg',
     'assets/MX.jpeg',
     'assets/GODZILLA.jpg',
-    'assets/CANCHA.jpg',
-    'assets/CERRO.jpg',
-    'assets/VOLCAN.jpg',
-    'assets/AULA.jpg',
-    /*10*/
+    //
     'assets/CU.jpg',
-    /* */
-    'assets/MONUMENTO.jpg',
-    'assets/SALON.jpg',
+    //
     'assets/DRUMS.jpg',
-    'assets/PECES.jpg',
-    'assets/PISTA.jpg',
-    'assets/RUN.jpg',
     'assets/ECU.jpg',
-    'assets/GALERIA.jpg'
+    'assets/PECES.jpg',
+    'assets/AULA.jpg',
+    'assets/GALERIA.jpg',
 ];
 
 // Preload images
